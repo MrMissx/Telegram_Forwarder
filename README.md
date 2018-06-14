@@ -2,9 +2,8 @@
 
 A simple Telegram Python bot running on Python3 to automatically forward messages from one chat to another.
 
-Currently, being used in our updates channel to automatically forward messages to all our groups. Can be found on 
-Telegram as [Kustom Updates Bot](https://t.me/KustomUpdatesBot). Alternatively, 
-[find me on Telegram](https://t.me/Sanchith_hegde) for any questions and/or suggestions.
+Currently, being used in our updates channel to automatically forward messages to all our groups. Originally,Can be found on 
+Telegram as [Kustom Updates Bot](https://t.me/KustomUpdatesBot). My Bot is deployed as [Saksham's Bot](https://t.me/Freelanc2bot)
 
 ## Starting The Bot
 
@@ -73,8 +72,3 @@ Install the necessary python dependencies by moving to the project directory and
 `pip3 install -r requirements.txt`.
 
 This will install all necessary python packages.
-
-## Thanks To
-
-[Paul Larsen](https://github.com/PaulSonOfLars) and [his tgbot library](https://github.com/PaulSonOfLars/tgbot), 
-which inspired me to write this bot's code.
