@@ -8,7 +8,7 @@ Currently, being used in our updates channel to automatically forward messages t
 
 Once your configuration (see below) is complete, simply run:
 
-`python3 -m auto_forwarder`
+`python3 -m forwarder`
 
 
 ## Setting Up The Bot (Read Before Trying To Use!):
@@ -19,7 +19,7 @@ Please make sure to use the latest Python version. (*Recommended*)
 There are two possible ways of configuring your bot: a `config.py` file, or ENV variables.
 
 The prefered version is to use a `config.py` file, as it makes it easier to see all your settings grouped together.
-This file should be placed in your `auto_forwarder` folder, alongside the `__main__.py` file . 
+This file should be placed in `forwarder` folder, alongside the `__main__.py` file . 
 This is where your bot token will be loaded from, and most of your other settings.
 
 It is recommended to import `sample_config` and extend the `Config` class, as this will ensure your config contains all 
@@ -75,4 +75,4 @@ This will install all necessary python packages.
 
 ### Credits
 
-* [saksham2410](https://github.com/saksham2410) - Source of AutoForwarder-TelegramBot
+* [saksham2410](https://github.com/saksham2410) - AutoForwarder-TelegramBot

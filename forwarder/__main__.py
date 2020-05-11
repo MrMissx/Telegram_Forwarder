@@ -5,12 +5,12 @@ from telegram import ParseMode
 from telegram.ext import CommandHandler, Filters
 from telegram.ext.dispatcher import run_async
 
-from auto_forwarder import API_KEY, OWNER_ID, WEBHOOK, IP_ADDRESS, URL, CERT_PATH, PORT, LOGGER, \
+from forwarder import API_KEY, OWNER_ID, WEBHOOK, IP_ADDRESS, URL, CERT_PATH, PORT, LOGGER, \
     updater, dispatcher
-from auto_forwarder.modules import ALL_MODULES
+from forwarder.modules import ALL_MODULES
 
 PM_START_TEXT = """
-Hey {}, I'm <b>{}</b>!
+Hey {}, I'm {}!
 I'm a bot used to forward messages from one chat to another.
 
 To obtain a list of commands, use /help.
@@ -21,14 +21,11 @@ Here is a list of usable commands:
  - /start : Starts the bot.
  - /help : Sends you this help message.
 
-How to obtain chat/channel id's using /id command:
- - In private chat with the bot : Replies with your id.
- - In a group chat : Replies with the group's id.
- - Forwarded message from channel : Replies with the channel's id, when the forwarded message is replied to, with /id command.
+just send /id in private chat/group/channel and i will reply it's id.
 """
 
 for module in ALL_MODULES:
-    importlib.import_module("auto_forwarder.modules." + module)
+    importlib.import_module("forwarder.modules." + module)
 
 
 @run_async
@@ -40,7 +37,7 @@ def start(bot: Bot, update: Update):
     if chat.type == "private":
         message.reply_text(PM_START_TEXT.format(user.first_name, dispatcher.bot.first_name), parse_mode=ParseMode.HTML)
     else:
-        message.reply_text("Yup, I'm up and running!")
+        message.reply_text("I'm up and running!")
 
 
 @run_async

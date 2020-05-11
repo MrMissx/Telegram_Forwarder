@@ -3,7 +3,7 @@ from telegram import ParseMode
 from telegram.ext import CommandHandler, Filters
 from telegram.ext.dispatcher import run_async
 
-from auto_forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, LOGGER, dispatcher
+from forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, LOGGER, dispatcher
 
 
 @run_async

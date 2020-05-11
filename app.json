@@ -4,12 +4,12 @@
   "keywords": [
     "telegram",
     "bot",
-    "forwarder",
+    "forwarder"
   ],
   "repository": "hhttps://github.com/keselekpermen69/forwarder_bot",
   "env": {
     "ENV": {
-      "description": "Setting this to ANYTHING will enable env variables",
+      "description": "Setting this to ANYTHING will enable env variables.",
       "value": "ANYTHING"
     },
     "API_KEY": {
@@ -17,11 +17,11 @@
       "value": ""
     },
     "OWNER_ID": {
-      "description": "An integer of consisting of your owner ID",
+      "description": "An integer of consisting of your owner ID.",
       "value": "873134115"
     },
     "FROM_CHATS": {
-      "description": "List of chat id's to forward messages from",
+      "description": "List of chat id's to forward messages from.",
       "value": "-1001234704297"
     },
     "TO_CHATS": {
@@ -29,11 +29,11 @@
       "value": ""
     },	
     "WEBHOOK": {
-      "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
+      "description": "Setting this to ANYTHING will enable webhooks when in env mode messages.",
       "value": "False"
     },
     "IP_ADDRESS": {
-      "description": "leave it 0.0.0.0 if using Heroku",
+      "description": "leave it 0.0.0.0 if using Heroku.",
       "value": "0.0.0.0"
     },
     "URL": {
@@ -41,11 +41,11 @@
       "value": "None"
     },
     "PORT": {
-      "description": "Port to listen on for webhooks",
+      "description": "Port to listen on for webhooks.",
       "value": "5000"
     },
     "CERT_PATH": {
-      "description": "Path to certificate file (don't change if you don't know)",
+      "description": "Path to certificate file (don't change if you don't know).",
       "value": "None"
     },
     "WORKERS": {

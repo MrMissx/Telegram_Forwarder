@@ -1,1 +1,1 @@
-web: python3 -m auto_forwarder
+web: python3 -m forwarder

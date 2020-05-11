@@ -1,4 +1,4 @@
-from auto_forwarder import LOGGER
+from forwarder import LOGGER
 
 
 def __list_all_modules():
