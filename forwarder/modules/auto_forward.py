@@ -2,7 +2,7 @@ from telegram import Bot, Update
 from telegram.ext import MessageHandler, Filters
 from telegram.ext.dispatcher import run_async
 
-from auto_forwarder import FROM_CHATS, TO_CHATS, LOGGER, dispatcher
+from forwarder import FROM_CHATS, TO_CHATS, LOGGER, dispatcher
 
 
 @run_async
@@ -28,4 +28,4 @@ try:
     dispatcher.add_handler(FORWARD_HANDLER)
 
 except ValueError:  # When FROM_CHATS list is not set because user doesn't know chat id(s)
-    LOGGER.warn("Did NOT add FORWARD_HANDLER because your FROM_CHATS list is empty.")
+    LOGGER.warn("I can't FORWARD_HANDLER because your FROM_CHATS list is empty.")

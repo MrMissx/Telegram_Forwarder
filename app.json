@@ -22,7 +22,7 @@
     },
     "FROM_CHATS": {
       "description": "List of chat id's to forward messages from.",
-      "value": "-1001234704297"
+      "value": ""
     },
     "TO_CHATS": {
       "description": "List of chat id's to forward messages to",
@@ -30,7 +30,7 @@
     },	
     "WEBHOOK": {
       "description": "Setting this to ANYTHING will enable webhooks when in env mode messages.",
-      "value": "False"
+      "required": "False"
     },
     "IP_ADDRESS": {
       "description": "leave it 0.0.0.0 if using Heroku.",
@@ -45,8 +45,8 @@
       "value": "5000"
     },
     "CERT_PATH": {
-      "description": "Path to certificate file (don't change if you don't know).",
-      "value": "None"
+      "description": "Path to certificate file (leave it blank if you don't know).",
+      "required": "False"
     },
     "WORKERS": {
       "description": "Number of threads to use, this depends on usage.  4 is the recommended (and default) amount, but your experience may vary.",
