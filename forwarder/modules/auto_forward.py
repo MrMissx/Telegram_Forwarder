@@ -23,9 +23,9 @@ def forward(bot: Bot, update: Update):
 
 try:
     FORWARD_HANDLER = MessageHandler(Filters.chat(FROM_CHATS) & ~Filters.status_update & ~Filters.command,
-                                     forward, channel_post_updates=True)
+                                     forward)
     
     dispatcher.add_handler(FORWARD_HANDLER)
 
 except ValueError:  # When FROM_CHATS list is not set because user doesn't know chat id(s)
-    LOGGER.warn("I can't FORWARD_HANDLER because your FROM_CHATS list is empty.")
+    LOGGER.warn("I can't Forward because your FROM_CHATS list is empty.")
