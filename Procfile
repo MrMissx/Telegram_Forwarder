@@ -1,1 +1,1 @@
-web: python3 -m forwarder
+worker: python3 -m forwarder
