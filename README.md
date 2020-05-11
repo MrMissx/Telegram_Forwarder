@@ -1,18 +1,25 @@
-# AutoForwarder
+# Telegram Forwarder
 
 A simple Telegram Python bot running on Python3 to automatically forward messages from one chat to another.
 
-Currently, being used in our updates channel to automatically forward messages to all our groups.
 
 ## Starting The Bot
 
-Once your configuration (see below) is complete, simply run:
+Once you've setup your database and your configuration (see below) is complete, simply run:
 
 `python3 -m forwarder`
+
+or you can host and run this bot on [Heroku](https://github.com/keselekpermen69/Telegram_Forwarder#Host-on-Heroku)
+
+
+### Host on Heroku
+
+<p><a href="https://heroku.com/deploy?template=https://github.com/KeselekPermen69/Telegram_Forwarder/tree/master"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"/></a></p>
 
 
 ## Setting Up The Bot (Read Before Trying To Use!):
 Please make sure to use the latest Python version. (*Recommended*)
+
 
 ### Configuration
 
@@ -61,8 +68,9 @@ minus (-) sign in the chat ID's of groups and channels. You can add ID's of user
  - `PORT`: Port to use for your webhooks.
 
  - `WORKERS`: Number of threads to use. 4 is the recommended (and default) amount, but your experience may vary.
+ **NOTE:** You may need to use more workers if the number of messages to be forwarded are more. 
+ But going crazy with more threads wont necessarily speed up your bot due to the way python asynchronous calls work.
 
-**NOTE:** You may need to use more workers if the number of messages to be forwarded are more.
 
 ### Python dependencies
 
