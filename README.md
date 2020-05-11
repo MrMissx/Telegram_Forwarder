@@ -2,8 +2,7 @@
 
 A simple Telegram Python bot running on Python3 to automatically forward messages from one chat to another.
 
-Currently, being used in our updates channel to automatically forward messages to all our groups. Originally,Can be found on 
-Telegram as [Kustom Updates Bot](https://t.me/KustomUpdatesBot). My Bot is deployed as [Saksham's Bot](https://t.me/Freelanc2bot)
+Currently, being used in our updates channel to automatically forward messages to all our groups.
 
 ## Starting The Bot
 
@@ -32,12 +31,12 @@ from auto_forwarder.sample_config import Config
 
 
 class Development(Config):
-    API_KEY = "1234567890:Abcdef1234567890GHIJ"  # My bot API key
-    OWNER_ID = 1234567890  # My user id
+    API_KEY = "1234567890:Abcdef1234567890GHIJ"  # Your bot API key
+    OWNER_ID = 1234567890  # Your user id
 
     # Make sure to include the '-' sign in group and channel ids.
     FROM_CHATS = [-1001234567890]  # List of chat id's to forward messages from.
-    TO_CHATS = [-1001234567890 , 1234567890]  # List of chat id's to forward messages to.
+    TO_CHATS = [-1001234567890, -1234567890]  # List of chat id's to forward messages to.
     
     WORKERS = 4
 ```
@@ -72,3 +71,8 @@ Install the necessary python dependencies by moving to the project directory and
 `pip3 install -r requirements.txt`.
 
 This will install all necessary python packages.
+
+
+### Credits
+
+* [saksham2410](https://github.com/saksham2410) - Source of AutoForwarder-TelegramBot
