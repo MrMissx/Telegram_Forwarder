@@ -54,7 +54,6 @@ def help(bot: Bot, update: Update):
 def main():
     start_handler = CommandHandler("start", start, filters=Filters.user(OWNER_ID))
     help_handler = CommandHandler("help", help, filters=Filters.user(OWNER_ID))
-    
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
 

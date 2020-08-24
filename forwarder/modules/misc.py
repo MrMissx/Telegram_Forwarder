@@ -3,7 +3,7 @@ from telegram import ParseMode
 from telegram.ext import CommandHandler, Filters
 from telegram.ext.dispatcher import run_async
 
-from forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, LOGGER, dispatcher
+from forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, dispatcher
 
 
 @run_async
@@ -19,7 +19,6 @@ def get_id(bot: Bot, update: Update):
                 "The forwarder, {}, has an ID of `{}`.".format(
                     sender.first_name, sender.id,
                     forwarder.first_name, forwarder.id), parse_mode=ParseMode.MARKDOWN)
-        
         elif message.reply_to_message.forward_from_chat:  # Replied message is a forward from a channel
             channel = message.reply_to_message.forward_from_chat
             forwarder = message.reply_to_message.from_user
