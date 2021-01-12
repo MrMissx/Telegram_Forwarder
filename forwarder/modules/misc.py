@@ -1,6 +1,6 @@
 from telegram import Bot, Update
 from telegram import ParseMode
-from telegram.ext import CommandHandler, Filters
+from telegram.ext import MessageHandler, Filters
 from telegram.ext.dispatcher import run_async
 
 from forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, dispatcher
@@ -31,7 +31,7 @@ def get_id(bot: Bot, update: Update):
         else:
             user = message.reply_to_message.from_user  # Replied message is a message from a user
             message.reply_text("{}'s ID is `{}`.".format(user.first_name, user.id), parse_mode=ParseMode.MARKDOWN)
-   
+
     else:
         chat = update.effective_chat
         
@@ -42,6 +42,10 @@ def get_id(bot: Bot, update: Update):
             message.reply_text("This group's ID is `{}`.".format(chat.id), parse_mode=ParseMode.MARKDOWN)
 
 
-GET_ID_HANDLER = CommandHandler("id", get_id, filters=Filters.user(OWNER_ID) | Filters.chat(FROM_CHATS + TO_CHATS))
+GET_ID_HANDLER = MessageHandler(
+    Filters.command & Filters.regex(r"^/id") & (Filters.user(OWNER_ID) | Filters.update.channel_posts),
+    get_id,
+    channel_post_updates=True
+)
 
 dispatcher.add_handler(GET_ID_HANDLER)
