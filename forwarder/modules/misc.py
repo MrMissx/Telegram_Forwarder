@@ -1,13 +1,11 @@
 from telegram import Bot, Update
 from telegram import ParseMode
 from telegram.ext import MessageHandler, Filters
-from telegram.ext.dispatcher import run_async
 
 from forwarder import OWNER_ID, FROM_CHATS, TO_CHATS, dispatcher
 
 
-@run_async
-def get_id(bot: Bot, update: Update):
+def get_id(update, context):
     message = update.effective_message    # type: Optional[Message]
 
     if message.reply_to_message:  # Message is a reply to another message
@@ -45,7 +43,7 @@ def get_id(bot: Bot, update: Update):
 GET_ID_HANDLER = MessageHandler(
     Filters.command & Filters.regex(r"^/id") & (Filters.user(OWNER_ID) | Filters.update.channel_posts),
     get_id,
-    channel_post_updates=True
+    run_async=True,
 )
 
 dispatcher.add_handler(GET_ID_HANDLER)
