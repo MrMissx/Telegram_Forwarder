@@ -20,7 +20,7 @@ def forward(update, context):
 
 try:
     FORWARD_HANDLER = MessageHandler(
-        Filters.chat(FROM_CHATS) & Filters.update.channel_posts & ~Filters.status_update & ~Filters.command,
+        Filters.chat(FROM_CHATS) & ~Filters.status_update & ~Filters.command,
         forward,
         run_async=True
     )
