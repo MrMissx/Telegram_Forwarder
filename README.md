@@ -34,7 +34,7 @@ defaults set in the `sample_config`, hence making it easier to upgrade.
 
 An example `config.py` file could be:
 ```
-from auto_forwarder.sample_config import Config
+from forwarder.sample_config import Config
 
 
 class Development(Config):
