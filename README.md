@@ -90,6 +90,7 @@ This will install all necessary python packages.
 Before launch you need to copy file ```env_dist``` to file ```.env``` and fill the values in it.
 
 Then, simple run the command: ```docker-compose up -d```
+
 You can view the logs by the command: ```docker-compose logs -f```
 
 
