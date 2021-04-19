@@ -1,9 +1,7 @@
 import importlib
 
-from telegram import Bot, Update
 from telegram import ParseMode
 from telegram.ext import CommandHandler, Filters
-from telegram.ext.dispatcher import run_async
 
 from forwarder import API_KEY, OWNER_ID, WEBHOOK, IP_ADDRESS, URL, CERT_PATH, PORT, LOGGER, \
     updater, dispatcher
@@ -28,8 +26,7 @@ for module in ALL_MODULES:
     importlib.import_module("forwarder.modules." + module)
 
 
-@run_async
-def start(bot: Bot, update: Update):
+def start(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     message = update.effective_message  # type: Optional[Message]
     user = update.effective_user  # type: Optional[User]
@@ -40,8 +37,7 @@ def start(bot: Bot, update: Update):
         message.reply_text("I'm up and running!")
 
 
-@run_async
-def help(bot: Bot, update: Update):
+def help(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     message = update.effective_message  # type: Optional[Message]
 
@@ -52,8 +48,8 @@ def help(bot: Bot, update: Update):
 
 
 def main():
-    start_handler = CommandHandler("start", start, filters=Filters.user(OWNER_ID))
-    help_handler = CommandHandler("help", help, filters=Filters.user(OWNER_ID))
+    start_handler = CommandHandler("start", start, filters=Filters.user(OWNER_ID), run_async=True)
+    help_handler = CommandHandler("help", help, filters=Filters.user(OWNER_ID), run_async=True)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
 

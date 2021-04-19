@@ -1,0 +1,10 @@
+# Time zone in tz database format
+TZ=Europe/Minsk
+ENV=ANYTHING
+WORKERS=4
+BOT_TOKEN=
+# ID of user which can configure the bot throught PM
+OWNER_ID=
+# Chat ID's in format -100XXXXXXXXXX
+FROM_CHATS=
+TO_CHATS=
