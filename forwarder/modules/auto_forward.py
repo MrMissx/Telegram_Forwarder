@@ -1,7 +1,18 @@
+from typing import Union
+
+from telegram import Message, MessageId
 from telegram.ext import CallbackContext, Filters, MessageHandler
+from telegram.error import ChatMigrated
 from telegram.update import Update
 
 from forwarder import FROM_CHATS, LOGGER, REMOVE_TAG, TO_CHATS, dispatcher
+
+
+def send_message(message: Message, chat_id: int) -> Union[MessageId, Message]:
+    if REMOVE_TAG:
+        return message.copy(chat_id)
+    return message.forward(chat_id)
+
 
 
 def forward(update: Update, context: CallbackContext):
@@ -16,10 +27,10 @@ def forward(update: Update, context: CallbackContext):
             context.bot.get_chat(chat).title or context.bot.get_chat(chat).first_name
         )
         try:
-            if REMOVE_TAG:
-                message.copy(chat)
-            else:
-                message.forward(chat_id=chat)
+            send_message(message, chat)
+        except ChatMigrated as err:
+            send_message(message, err.new_chat_id)
+            LOGGER.warning(f"Chat {chat} has been migrated to {err.new_chat_id}!! Edit the config file!!")
         except:
             LOGGER.exception(
                 'Error while forwarding message from chat "{}" to chat "{}".'.format(
