@@ -1,20 +1,25 @@
 if not __name__.endswith("sample_config"):
     import sys
-    print("The README is there to be read. Extend this sample config to a config file, don't just rename and change "
-          "values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
+
+    print(
+        "The README is there to be read. Extend this sample config to a config file, don't just rename and change "
+        "values here. Doing that WILL backfire on you.\nBot quitting.",
+        file=sys.stderr,
+    )
     quit(1)
 
 
 # Create a new config.py file in same dir and import, then extend this class.
 class Config(object):
     LOGGER = True
+    REMOVE_TAG = False
 
     # REQUIRED
     API_KEY = "617722711:AAHysCHsVcQja6LOlHa88101lKjrxez80-M"  # API key obtained from BotFather
     OWNER_ID = "582884567"  # If you dont know, run the bot and do /id in your private chat with the bot
 
     # FOR AUTOMATICALLY FORWARDING MESSAGES
-    FROM_CHATS = [-1001234704297 ]  # List of chat id's to forward messages from
+    FROM_CHATS = [-1001234704297]  # List of chat id's to forward messages from
     TO_CHATS = [-1001128355490]  # List of chat id's to forward messages to
 
     # FOR WEBHOOKS
