@@ -44,7 +44,8 @@ class Development(Config):
     # Make sure to include the '-' sign in group and channel ids.
     FROM_CHATS = [-1001234567890]  # List of chat id's to forward messages from.
     TO_CHATS = [-1001234567890, -1234567890]  # List of chat id's to forward messages to.
-    
+
+    REMOVE_TAG = True
     WORKERS = 4
 ```
 
@@ -61,6 +62,7 @@ minus (-) sign in the chat ID's of groups and channels. You can add ID's of user
 messages with the bot.
  - `TO_CHATS`: **Space separated** list of chat ID's to forward messages to. Do not forget to include the 
 minus (-) sign in the chat ID's of groups and channels. You can add ID's of users too, to forward messages to them.
+ - `REMOVE_TAG`: Wether remove the "Forwarded From ...." tag or not.
 
  - `WEBHOOK`: Setting this to `ANYTHING` will enable webhooks when in env mode messages.
  - `URL`: The URL your webhook should connect to (only needed for webhook mode).

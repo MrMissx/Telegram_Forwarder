@@ -5,18 +5,18 @@ import telegram.ext as tg
 
 # enable logging
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO)
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 
 LOGGER = logging.getLogger(__name__)
 
 
-ENV = bool(os.environ.get('ENV', False))
+ENV = bool(os.environ.get("ENV", False))
 
 if ENV:
-    API_KEY = os.environ.get('API_KEY', None)
+    API_KEY = os.environ.get("API_KEY", None)
     try:
-        OWNER_ID = int(os.environ.get('OWNER_ID', None))
+        OWNER_ID = int(os.environ.get("OWNER_ID", 0))
     except ValueError:
         raise Exception("Your OWNER_ID env variable is not a valid integer.")
 
@@ -30,16 +30,18 @@ if ENV:
     except ValueError:
         raise Exception("Your TO_CHATS list does not contain valid integers.")
 
-    WEBHOOK = bool(os.environ.get('WEBHOOK', False))
-    IP_ADDRESS = os.environ.get('IP_ADDRESS', "0.0.0.0")
-    URL = os.environ.get('URL', "")  # Does not contain token
-    PORT = int(os.environ.get('PORT', 5000))
+    REMOVE_TAG = bool(os.environ.get("REMOVE_TAG", False))
+    WEBHOOK = bool(os.environ.get("WEBHOOK", False))
+    IP_ADDRESS = os.environ.get("IP_ADDRESS", "0.0.0.0")
+    URL = os.environ.get("URL", "")  # Does not contain token
+    PORT = int(os.environ.get("PORT", 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
 
-    WORKERS = int(os.environ.get('WORKERS', 4))
+    WORKERS = int(os.environ.get("WORKERS", 4))
 
 else:
     from forwarder.config import Development as Config
+
     API_KEY = Config.API_KEY
     try:
         OWNER_ID = int(Config.OWNER_ID)
@@ -56,6 +58,7 @@ else:
     except ValueError:
         raise Exception("Your TO_CHATS list does not contain valid integers.")
 
+    REMOVE_TAG = Config.REMOVE_TAG
     WEBHOOK = Config.WEBHOOK
     IP_ADDRESS = Config.IP_ADDRESS
     URL = Config.URL
