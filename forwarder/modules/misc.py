@@ -1,21 +1,11 @@
-<<<<<<< HEAD
-from telegram import Bot, Update
-from telegram import ParseMode
-from telegram.ext import MessageHandler, Filters
-=======
 from telegram import Bot, ParseMode, Update
 from telegram.ext import Filters, MessageHandler
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 
 from forwarder import FROM_CHATS, OWNER_ID, TO_CHATS, dispatcher
 
 
 def get_id(update, context):
-<<<<<<< HEAD
-    message = update.effective_message    # type: Optional[Message]
-=======
     message = update.effective_message  # type: Optional[Message]
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 
     if message.reply_to_message:  # Message is a reply to another message
         if (
@@ -44,10 +34,6 @@ def get_id(update, context):
             )
 
         else:
-<<<<<<< HEAD
-            user = message.reply_to_message.from_user  # Replied message is a message from a user
-            message.reply_text("{}'s ID is `{}`.".format(user.first_name, user.id), parse_mode=ParseMode.MARKDOWN)
-=======
             user = (
                 message.reply_to_message.from_user
             )  # Replied message is a message from a user
@@ -55,7 +41,6 @@ def get_id(update, context):
                 "{}'s ID is `{}`.".format(user.first_name, user.id),
                 parse_mode=ParseMode.MARKDOWN,
             )
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 
     else:
         chat = update.effective_chat
@@ -73,13 +58,9 @@ def get_id(update, context):
 
 
 GET_ID_HANDLER = MessageHandler(
-<<<<<<< HEAD
-    Filters.command & Filters.regex(r"^/id") & (Filters.user(OWNER_ID) | Filters.update.channel_posts),
-=======
     Filters.command
     & Filters.regex(r"^/id")
     & (Filters.user(OWNER_ID) | Filters.update.channel_posts),
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
     get_id,
     run_async=True,
 )

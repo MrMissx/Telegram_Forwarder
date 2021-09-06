@@ -1,10 +1,6 @@
 import importlib
 
-<<<<<<< HEAD
-from telegram import ParseMode
-=======
 from telegram import ParseMode, Update
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 from telegram.ext import CommandHandler, Filters
 
 from forwarder import (API_KEY, CERT_PATH, IP_ADDRESS, LOGGER, OWNER_ID, PORT,
@@ -30,17 +26,10 @@ for module in ALL_MODULES:
     importlib.import_module("forwarder.modules." + module)
 
 
-<<<<<<< HEAD
-def start(update, context):
-    chat = update.effective_chat  # type: Optional[Chat]
-    message = update.effective_message  # type: Optional[Message]
-    user = update.effective_user  # type: Optional[User]
-=======
 def start(update: Update, _):
     chat = update.effective_chat
     message = update.effective_message
     user = update.effective_user
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 
     if chat.type == "private":
         message.reply_text(
@@ -51,15 +40,9 @@ def start(update: Update, _):
         message.reply_text("I'm up and running!")
 
 
-<<<<<<< HEAD
-def help(update, context):
-    chat = update.effective_chat  # type: Optional[Chat]
-    message = update.effective_message  # type: Optional[Message]
-=======
 def help(update: Update, _):
     chat = update.effective_chat
     message = update.effective_message
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
 
     if not chat.type == "private":
         message.reply_text("Contact me via PM to get a list of usable commands.")
@@ -68,17 +51,12 @@ def help(update: Update, _):
 
 
 def main():
-<<<<<<< HEAD
-    start_handler = CommandHandler("start", start, filters=Filters.user(OWNER_ID), run_async=True)
-    help_handler = CommandHandler("help", help, filters=Filters.user(OWNER_ID), run_async=True)
-=======
     start_handler = CommandHandler(
         "start", start, filters=Filters.user(OWNER_ID), run_async=True
     )
     help_handler = CommandHandler(
         "help", help, filters=Filters.user(OWNER_ID), run_async=True
     )
->>>>>>> bda4a87189e7e583a471377feb3c48680cbefb79
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
 
