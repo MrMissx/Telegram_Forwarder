@@ -63,3 +63,4 @@ target/
 # Bot config file
 # DO NOT REMOVE THIS FILE FROM .gitignore
 config.py
+.env

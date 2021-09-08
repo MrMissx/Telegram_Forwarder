@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+
+  telegram-forwarder:
+    image: telegram-forwarder-bot
+    stdin_open: true
+    tty: true
+    restart: always
+    build:
+      context: .
+    environment:
+      - TZ=$TZ
+      - ENV=$ENV
+      - API_KEY=$BOT_TOKEN
+      - OWNER_ID=$OWNER_ID
+      - FROM_CHATS=$FROM_CHATS
+      - TO_CHATS=$TO_CHATS
+      - WORKERS=$WORKERS
+    command: python3 -m forwarder
