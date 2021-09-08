@@ -5,8 +5,6 @@ ENV LANG=C.UTF-8
 RUN apk update && apk add --no-cache alpine-sdk \ 
                                      python3-dev \
                                      libffi-dev \
-                                     rust \  
-                                     cargo \
                                      openssl-dev \
                         && rm -rf /var/cache/apk/*
 COPY ./ /app/
