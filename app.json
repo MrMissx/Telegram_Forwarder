@@ -1,9 +1,9 @@
 {
   "name": "Telegram Forwarder Bot",
   "description": "Telegram bot to forward messages automaticaly",
-  "keywords": [
-    "telegram",
-    "bot",
+  "keywords": [5743390719:AAEJeW5d-DLH1_kC93snhweO2xXUcrsHUQ0
+    "telegram",@Jedle707
+    "bot",@Sadissbibot
     "forwarder"
   ],
   "repository": "hhttps://github.com/keselekpermen69/forwarder_bot",
@@ -12,19 +12,19 @@
       "description": "Setting this to ANYTHING will enable env variables.",
       "value": "ANYTHING"
     },
-    "API_KEY": {
+    "API_KEY":5743390719:AAEJeW5d-DLH1_kC93snhweO2xXUcrsHUQ0 {
       "description": "Your bot API KEY, get this value from @BotFather.",
       "value": ""
     },
-    "OWNER_ID": {
+    "OWNER_ID":-5779700223 {
       "description": "An integer of consisting of your owner ID.",
-      "value": "873134115"
+      "value": "87313411"
     },
-    "FROM_CHATS": {
+    "FROM_CHATS":-5779700223 {
       "description": "List of chat id's to forward messages from.",
       "required": false
     },
-    "TO_CHATS": {
+    "TO_CHATS":-5779700223 {
       "description": "List of chat id's to forward messages to",
       "required": false
     },
@@ -36,7 +36,7 @@
       "description": "leave it 0.0.0.0 if using Heroku.",
       "value": "0.0.0.0"
     },
-    "URL": {
+    "URL":http://t.me/Sadissbibot {
       "description": "The URL your webhook should connect to (only needed for webhook mode).",
       "value": "None"
     },
@@ -49,8 +49,8 @@
       "required": false
     },
     "WORKERS": {
-      "description": "Number of threads to use, this depends on usage.  4 is the recommended (and default) amount, but your experience may vary.",
-      "value": "4"
+      "description": "Number of threads to use, this depends on usage.  1000 is the recommended (and default) amount, but your experience may vary.",
+      "value": "1000"
     }
   }
 } 
