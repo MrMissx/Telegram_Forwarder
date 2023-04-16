@@ -1,20 +1,14 @@
 import logging
 import json
-from os import getenv
+from os import getenv, path
 
 from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder
 
 from forwarder.utils import get_source
 
-
 load_dotenv(".env")
 
-# load json file
-with open("chat_list.json") as data:
-    CONFIG = json.load(data)
-
-SOURCE_CHAT = get_source(CONFIG)
 
 logging.basicConfig(
     format="[ %(asctime)s: %(levelname)-8s ] %(name)-20s - %(message)s",
@@ -22,6 +16,16 @@ logging.basicConfig(
 )
 
 LOGGER = logging.getLogger(__name__)
+
+# load json file
+config_name = "chat_lista.json"
+if not path.isfile(config_name):
+    LOGGER.error("No chat_list.json config file found! Exiting...")
+    exit(1)
+with open(config_name, "r") as data:
+    CONFIG = json.load(data)
+
+SOURCE_CHAT = get_source(CONFIG)
 
 
 BOT_TOKEN = getenv("BOT_TOKEN")
