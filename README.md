@@ -2,100 +2,99 @@
 
 A simple Telegram Python bot running on Python3 to automatically forward messages from one chat to another.
 
+## Migration from V1
+
+v2 uses a different configuration file format. Please refer to the [Configuration](#configuration) section for more information. The bot will not start if the configuration file is not in the correct format.
 
 ## Starting The Bot
 
-Once you've setup your database and your configuration (see below) is complete, simply run:
+Once you've setup your your configuration (see below) is complete, simply run:
 
-`python3 -m forwarder`
+```shell
+python -m forwarder
+```
 
-or you can host and run this bot on [Heroku](https://github.com/keselekpermen69/Telegram_Forwarder#Host-on-Heroku)
+or with poetry (recommended)
 
+```shell
+poetry run forwarder
+```
 
-### Host on Heroku
+## Setting Up The Bot (Read the instruction bellow before starting the bot!):
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/KeselekPermen69/Telegram_Forwarder/tree/master"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"/></a></p>
-
-
-## Setting Up The Bot (Read Before Trying To Use!):
-Please make sure to use the latest Python version. (*Recommended*)
-
+Telegram Forwarder only supports Python 3.9 and higher.
 
 ### Configuration
 
-There are two possible ways of configuring your bot: a `config.py` file, or ENV variables.
+There are two files mandatory for the bot to work `.env` and `chat_list.json`.
 
-The prefered version is to use a `config.py` file, as it makes it easier to see all your settings grouped together.
-This file should be placed in `forwarder` folder, alongside the `__main__.py` file . 
-This is where your bot token will be loaded from, and most of your other settings.
+#### `.env`
 
-It is recommended to import `sample_config` and extend the `Config` class, as this will ensure your config contains all 
-defaults set in the `sample_config`, hence making it easier to upgrade.
+Template env may be found in `sample.env`. Rename it to `.env` and fill in the values:
 
-An example `config.py` file could be:
+-   `BOT_TOKEN` - Telegram bot token. You can get it from [@BotFather](https://t.me/BotFather)
+
+-   `OWNER_ID` - An integer of consisting of your owner ID.
+
+-   `REMOVE_TAG` - set to `True` if you want to remove the tag ("Forwarded from xxxxx") from the forwarded message.
+
+#### `chat_list.json`
+
+Template chat_list may be found in `chat_list.sample.json`. Rename it to `chat_list.json`.
+
+This file contains the list of chats to forward messages from and to. The bot expect it to be an Array of objects with the following structure:
+
+```json
+[
+    {
+        "source": -10012345678,
+        "destination": [-10011111111, -10022222222]
+    }
+]
 ```
-from forwarder.sample_config import Config
 
+-   `source` - The chat ID of the chat to forward messages from. It can be a group or a channel.
+-   `destination` - An array of chat IDs to forward messages to. It can be a group or a channel.
 
-class Development(Config):
-    API_KEY = "1234567890:Abcdef1234567890GHIJ"  # Your bot API key
-    OWNER_ID = 1234567890  # Your user id
-
-    # Make sure to include the '-' sign in group and channel ids.
-    FROM_CHATS = [-1001234567890]  # List of chat id's to forward messages from.
-    TO_CHATS = [-1001234567890, -1234567890]  # List of chat id's to forward messages to.
-
-    REMOVE_TAG = True
-    WORKERS = 4
-```
-
-If you can't have a `config.py` file (EG on Heroku), it is also possible to use environment variables.
-The following environment variables are supported:
-
- - `ENV`: Setting this to `ANYTHING` will enable environment variables.
-
- - `API_KEY`: Your bot API key, as a string.
- - `OWNER_ID`: An integer of consisting of your owner ID.
-
- - `FROM_CHATS`: **Space separated** list of chat ID's to forward messages from. Do not forget to include the 
-minus (-) sign in the chat ID's of groups and channels. You can add ID's of users too, to forward their 
-messages with the bot.
- - `TO_CHATS`: **Space separated** list of chat ID's to forward messages to. Do not forget to include the 
-minus (-) sign in the chat ID's of groups and channels. You can add ID's of users too, to forward messages to them.
- - `REMOVE_TAG`: Wether remove the "Forwarded From ...." tag or not.
-
- - `WEBHOOK`: Setting this to `ANYTHING` will enable webhooks when in env mode messages.
- - `URL`: The URL your webhook should connect to (only needed for webhook mode).
- - `CERT_PATH`: Path to your webhook certificate.
- - `PORT`: Port to use for your webhooks.
-
- - `WORKERS`: Number of threads to use. 4 is the recommended (and default) amount, but your experience may vary.
- **NOTE:** You may need to use more workers if the number of messages to be forwarded are more. 
- But going crazy with more threads wont necessarily speed up your bot due to the way python asynchronous calls work.
-
+You may add as many objects as you want. The bot will forward messages from all the chats in the `source` field to all the chats in the `destination` field. Duplicates are allowed as it already handled by the bot.
 
 ### Python dependencies
 
 Install the necessary python dependencies by moving to the project directory and running:
 
-`pip3 install -r requirements.txt`.
+```shell
+poetry install --only main
+```
+
+or with pip
+
+```shell
+pip3 install -r requirements.txt
+```
 
 This will install all necessary python packages.
-
 
 ### Launch in Docker container
 
 #### Requrements
- - Docker
- - docker-compose
 
-Before launch you need to copy file ```env_dist``` to file ```.env``` and fill the values in it.
+-   Docker
+-   docker-compose
 
-Then, simple run the command: ```docker-compose up -d```
+Before launch make sure all configuration are completed (`.env` and `chat_list.json`)!
 
-You can view the logs by the command: ```docker-compose logs -f```
+Then, simply run the command:
 
+```shell
+docker-compose up -d
+```
+
+You can view the logs by the command:
+
+```shell
+docker-compose logs -f
+```
 
 ### Credits
 
-* [saksham2410](https://github.com/saksham2410) - AutoForwarder-TelegramBot
+-   [saksham2410](https://github.com/saksham2410) - AutoForwarder-TelegramBot
