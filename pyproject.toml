@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "telegram-forwarder"
+version = "2.0.0"
+description = ""
+authors = ["mrmissx <hi@mrmiss.my.id>"]
+license = "GNU General Public License v3.0"
+readme = "README.md"
+packages = [
+    { include = "forwarder" }
+]
+
+[tool.poetry.scripts]
+forwarder = "forwarder.main:run"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-telegram-bot = "^20.2"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+#
+# Isort Config
+#
+[tool.isort]
+profile = "black"
+known_third_party = [
+    "telegram",
+    "dotenv"
+]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

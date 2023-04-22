@@ -1,22 +1,26 @@
-from telegram import Bot, ParseMode, Update
-from telegram.ext import Filters, MessageHandler
+from telegram import Update
+from telegram.constants import ParseMode
+from telegram.ext import filters, MessageHandler
 
-from forwarder import FROM_CHATS, OWNER_ID, TO_CHATS, dispatcher
+from forwarder import OWNER_ID, bot
 
 
-def get_id(update, context):
-    message = update.effective_message  # type: Optional[Message]
+async def get_id(update: Update, _):
+    message = update.effective_message
+    if not message:
+        return
 
     if message.reply_to_message:  # Message is a reply to another message
-        if (
-            message.reply_to_message.forward_from
-        ):  # Replied message is a forward from a user
+        if message.reply_to_message.forward_from:  # Replied message is a forward from a user
             sender = message.reply_to_message.forward_from
             forwarder = message.reply_to_message.from_user
-            message.reply_text(
+            await message.reply_text(
                 "The original sender, {}, has an ID of `{}`. \n"
                 "The forwarder, {}, has an ID of `{}`.".format(
-                    sender.first_name, sender.id, forwarder.first_name, forwarder.id
+                    sender.first_name,
+                    sender.id,
+                    forwarder.first_name if forwarder else "Unknown",
+                    forwarder.id if forwarder else "Unknown",
                 ),
                 parse_mode=ParseMode.MARKDOWN,
             )
@@ -25,44 +29,46 @@ def get_id(update, context):
         ):  # Replied message is a forward from a channel
             channel = message.reply_to_message.forward_from_chat
             forwarder = message.reply_to_message.from_user
-            message.reply_text(
+            await message.reply_text(
                 "The channel, {}, has an ID of `{}`. \n"
                 "The forwarder, {}, has an ID of `{}`.".format(
-                    channel.title, channel.id, forwarder.first_name, forwarder.id
+                    channel.title,
+                    channel.id,
+                    forwarder.first_name if forwarder else "Unknown",
+                    forwarder.id if forwarder else "Unknown",
                 ),
                 parse_mode=ParseMode.MARKDOWN,
             )
 
         else:
-            user = (
-                message.reply_to_message.from_user
-            )  # Replied message is a message from a user
-            message.reply_text(
-                "{}'s ID is `{}`.".format(user.first_name, user.id),
+            user = message.reply_to_message.from_user  # Replied message is a message from a user
+            await message.reply_text(
+                "{}'s ID is `{}`.".format(
+                    user.first_name if user else "Unknown", user.id if user else "Unknown"
+                ),
                 parse_mode=ParseMode.MARKDOWN,
             )
 
     else:
         chat = update.effective_chat
+        if not chat:
+            return
 
         if chat.type == "private":  # Private chat with the bot
-            message.reply_text(
+            await message.reply_text(
                 "Your ID is `{}`.".format(chat.id), parse_mode=ParseMode.MARKDOWN
             )
 
         else:  # Group chat where the bot is a member
-            message.reply_text(
+            await message.reply_text(
                 "This group's ID is `{}`.".format(chat.id),
                 parse_mode=ParseMode.MARKDOWN,
             )
 
 
 GET_ID_HANDLER = MessageHandler(
-    Filters.command
-    & Filters.regex(r"^/id")
-    & (Filters.user(OWNER_ID) | Filters.update.channel_posts),
+    filters.COMMAND & filters.Regex(r"^/id") & (filters.User(OWNER_ID) | filters.ChatType.CHANNEL),
     get_id,
-    run_async=True,
 )
 
-dispatcher.add_handler(GET_ID_HANDLER)
+bot.add_handler(GET_ID_HANDLER)

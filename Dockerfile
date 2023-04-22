@@ -1,16 +1,14 @@
-FROM python:3.8-alpine
+FROM python:3.10-slim-bullseye
 
-ENV LANG=C.UTF-8
+WORKDIR /app
 
-RUN apk update && apk add --no-cache alpine-sdk \ 
-                                     python3-dev \
-                                     libffi-dev \
-                                     openssl-dev \
-                        && rm -rf /var/cache/apk/*
-COPY ./ /app/
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r /app/requirements.txt
+COPY pyproject.toml poetry.lock ./
 
-WORKDIR /app/
-CMD ["python3 -m forwarder"]
+RUN poetry install --only main
+
+COPY . .
+
+CMD ["poetry", "run", "forwarder"]
