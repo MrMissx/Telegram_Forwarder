@@ -18,7 +18,7 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 # load json file
-config_name = "chat_lista.json"
+config_name = "chat_list.json"
 if not path.isfile(config_name):
     LOGGER.error("No chat_list.json config file found! Exiting...")
     exit(1)
