@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   telegram-forwarder:
+    container_name: telegram-forwarder
     image: telegram-forwarder-bot
     restart: unless-stopped
     build:
