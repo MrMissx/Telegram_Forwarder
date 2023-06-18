@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "telegram-forwarder"
-version = "2.0.0"
+version = "2.1.0"
 description = ""
 authors = ["mrmissx <hi@mrmiss.my.id>"]
 license = "GNU General Public License v3.0"

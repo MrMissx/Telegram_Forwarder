@@ -5,8 +5,6 @@ from os import getenv, path
 from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder
 
-from forwarder.utils import get_source
-
 load_dotenv(".env")
 
 
@@ -24,8 +22,6 @@ if not path.isfile(config_name):
     exit(1)
 with open(config_name, "r") as data:
     CONFIG = json.load(data)
-
-SOURCE_CHAT = get_source(CONFIG)
 
 
 BOT_TOKEN = getenv("BOT_TOKEN")
