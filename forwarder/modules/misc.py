@@ -10,60 +10,43 @@ async def get_id(update: Update, _):
     if not message:
         return
 
-    if message.reply_to_message:  # Message is a reply to another message
-        if message.reply_to_message.forward_from:  # Replied message is a forward from a user
+    if message.reply_to_message:
+        if message.reply_to_message.forward_from:  # Forwarded user
             sender = message.reply_to_message.forward_from
             forwarder = message.reply_to_message.from_user
-            await message.reply_text(
-                "The original sender, {}, has an ID of `{}`. \n"
-                "The forwarder, {}, has an ID of `{}`.".format(
-                    sender.first_name,
-                    sender.id,
-                    forwarder.first_name if forwarder else "Unknown",
-                    forwarder.id if forwarder else "Unknown",
-                ),
+            return await message.reply_text(
+                f"🙋‍♂️ The original sender ({sender.first_name}), ID is: `{sender.id}`\n"
+                f"⏩ The forwarder ({forwarder.first_name if forwarder else 'Unknown'}) ID: `{forwarder.id if forwarder else 'Unknown'}`",
                 parse_mode=ParseMode.MARKDOWN,
             )
-        elif (
-            message.reply_to_message.forward_from_chat
-        ):  # Replied message is a forward from a channel
+
+        if message.reply_to_message.forward_from_chat:  # Forwarded channel
             channel = message.reply_to_message.forward_from_chat
             forwarder = message.reply_to_message.from_user
-            await message.reply_text(
-                "The channel, {}, has an ID of `{}`. \n"
-                "The forwarder, {}, has an ID of `{}`.".format(
-                    channel.title,
-                    channel.id,
-                    forwarder.first_name if forwarder else "Unknown",
-                    forwarder.id if forwarder else "Unknown",
-                ),
-                parse_mode=ParseMode.MARKDOWN,
+            return await message.reply_text(
+                f"💬 The channel {channel.title} ID: `{channel.id}`\n"
+                f"⏩ The forwarder ({forwarder.first_name if forwarder else 'Unknown'}) ID: `{forwarder.id if forwarder else 'Unknown'}`",
             )
 
-        else:
-            user = message.reply_to_message.from_user  # Replied message is a message from a user
-            await message.reply_text(
-                "{}'s ID is `{}`.".format(
-                    user.first_name if user else "Unknown", user.id if user else "Unknown"
-                ),
-                parse_mode=ParseMode.MARKDOWN,
-            )
+        user = message.reply_to_message.from_user
+        return await message.reply_text(
+            f"🙋‍♂️ {user.first_name if user else 'Unknown'} ID: `{user.id if user else 'Unknown'}`"
+        )
 
-    else:
-        chat = update.effective_chat
-        if not chat:
-            return
+    chat = update.effective_chat
+    if not chat:
+        return
 
-        if chat.type == "private":  # Private chat with the bot
-            await message.reply_text(
-                "Your ID is `{}`.".format(chat.id), parse_mode=ParseMode.MARKDOWN
-            )
+    if chat.type == "private":  # Private chat with the bot
+        return await message.reply_text(f"🙋‍♂️ Your ID is `{chat.id}`.")
 
-        else:  # Group chat where the bot is a member
-            await message.reply_text(
-                "This group's ID is `{}`.".format(chat.id),
-                parse_mode=ParseMode.MARKDOWN,
-            )
+    result = f"👥 Chat ID: {chat.id}"
+    if chat.is_forum:
+        result += f"\n💬 Forum/Topic ID: {message.message_thread_id}"
+    return await message.reply_text(
+        result,
+        parse_mode=ParseMode.MARKDOWN,
+    )
 
 
 GET_ID_HANDLER = MessageHandler(
