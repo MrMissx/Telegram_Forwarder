@@ -15,6 +15,9 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
+httpx_logger = logging.getLogger('httpx')
+httpx_logger.setLevel(logging.WARNING)
+
 # load json file
 config_name = "chat_list.json"
 if not path.isfile(config_name):
