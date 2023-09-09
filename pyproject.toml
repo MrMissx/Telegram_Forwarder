@@ -5,16 +5,14 @@ description = ""
 authors = ["mrmissx <hi@mrmiss.my.id>"]
 license = "GNU General Public License v3.0"
 readme = "README.md"
-packages = [
-    { include = "forwarder" }
-]
+packages = [{ include = "forwarder" }]
 
 [tool.poetry.scripts]
 forwarder = "forwarder.main:run"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-python-telegram-bot = "^20.2"
+python-telegram-bot = "^20.5"
 python-dotenv = "^1.0.0"
 
 
@@ -32,10 +30,7 @@ target-version = ["py38"]
 #
 [tool.isort]
 profile = "black"
-known_third_party = [
-    "telegram",
-    "dotenv"
-]
+known_third_party = ["telegram", "dotenv"]
 
 
 [build-system]
