@@ -5,7 +5,7 @@ from telegram.error import ChatMigrated
 from telegram.ext import MessageHandler, filters, ContextTypes
 
 from forwarder import bot, REMOVE_TAG, LOGGER
-from forwarder.utils import get_source, get_destenation, parse_topic
+from forwarder.utils import get_source, get_destenation
 
 
 async def send_message(
@@ -23,7 +23,7 @@ async def forwarder(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
     if not message or not source:
         return
 
-    for chat in get_destenation(source.id):
+    for chat in get_destenation(message.chat_id, message.message_thread_id):
         try:
             await send_message(message, chat["chat_id"], thread_id=chat["thread_id"])
         except ChatMigrated as err:
