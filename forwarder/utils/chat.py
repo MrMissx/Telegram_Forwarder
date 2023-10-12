@@ -22,11 +22,18 @@ def get_source() -> List[ChatConfig]:
     return [parse_topic(chat["source"]) for chat in CONFIG]
 
 
-def get_destenation(source: int) -> List[ChatConfig]:
+def get_destenation(chat_id: int, topic_id: Optional[int] = None) -> List[ChatConfig]:
+    """Get destination from a specific source chat
+
+    Args:
+        chat_id (`int`): source chat id
+        topic_id (`Optional[int]`): source topic id. Defaults to None.
+    """
+
     dest: List[ChatConfig] = []
 
     for chat in CONFIG:
         parsed = parse_topic(chat["source"])
-        if parsed["chat_id"] == source:
+        if parsed["chat_id"] == chat_id and (topic_id is None or parsed["thread_id"] == topic_id):
             dest.extend([parse_topic(item) for item in chat["destination"]])
     return dest
