@@ -34,6 +34,8 @@ def get_destenation(chat_id: int, topic_id: Optional[int] = None) -> List[ChatCo
 
     for chat in CONFIG:
         parsed = parse_topic(chat["source"])
-        if parsed["chat_id"] == chat_id and (topic_id is None or parsed["thread_id"] == topic_id):
+
+        if parsed["chat_id"] == chat_id and parsed["thread_id"] == topic_id:
             dest.extend([parse_topic(item) for item in chat["destination"]])
+
     return dest
