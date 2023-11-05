@@ -1,7 +1,8 @@
+import asyncio
 from typing import Union, Optional
 
 from telegram import Update, Message, MessageId
-from telegram.error import ChatMigrated
+from telegram.error import ChatMigrated, RetryAfter
 from telegram.ext import MessageHandler, filters, ContextTypes
 
 from forwarder import bot, REMOVE_TAG, LOGGER
@@ -25,6 +26,10 @@ async def forwarder(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
 
     for chat in get_destenation(message.chat_id, message.message_thread_id):
         try:
+            await send_message(message, chat["chat_id"], thread_id=chat["thread_id"])
+        except RetryAfter as err:
+            LOGGER.warning(f"Rate limited, retrying in {err.retry_after} seconds")
+            await asyncio.sleep(err.retry_after + 0.2)
             await send_message(message, chat["chat_id"], thread_id=chat["thread_id"])
         except ChatMigrated as err:
             await send_message(message, err.new_chat_id)
