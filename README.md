@@ -51,8 +51,21 @@ This file contains the list of chats to forward messages from and to. The bot ex
     "destination": [-10011111111, "-10022222222#123456"]
   },
   {
-    "source": "-10087654321#000000",  // Topic/Forum group
-    "destination": ["-10033333333#654321"]
+    "source": "-10087654321#000000", // Topic/Forum group
+    "destination": ["-10033333333#654321"],
+    "filters": ["word1", "word2"] // message that contain this word will be forwarded
+  },
+  {
+    "source": -10087654321,
+    "destination": [-10033333333],
+    "blacklist": ["word3", "word4"] // message that contain this word will not be forwarded
+  },
+  {
+    "source": -10087654321,
+    "destination": [-10033333333],
+    "filters": ["word5"],
+    "blacklist": ["word6"]
+    // message must contain word5 and must not contain word6 to be forwarded
   }
 ]
 ```
@@ -62,7 +75,12 @@ This file contains the list of chats to forward messages from and to. The bot ex
   > If the source chat is a Topic groups, you **MUST** explicitly specify the topic ID. The bot will ignore incoming message from topic group if the topic ID is not specified.
 
 - `destination` - An array of chat IDs to forward messages to. It can be a group or a channel.
+
   > Destenation supports Topics chat. You can use `#topicID` string to forward to specific topic. Example: `[-10011111111, "-10022222222#123456"]`. With this config it will forward to chat `-10022222222` with topic `123456` and to chat `-10011111111` .
+
+- `filters` (Optional) - An array of strings to filter words. If the message containes any of the strings in the array, it **WILL BE** forwarded.
+
+- `blacklist` (Optional) - An array of strings to blacklist words. If the message containes any of the string in the array, it will **NOT BE** forwarded.
 
 You may add as many objects as you want. The bot will forward messages from all the chats in the `source` field to all the chats in the `destination` field. Duplicates are allowed as it already handled by the bot.
 
