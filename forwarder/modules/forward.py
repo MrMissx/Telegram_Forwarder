@@ -49,7 +49,7 @@ async def forwarder(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
                     f"Chat {chat} has been migrated to {err.new_chat_id}!! Edit the config file!!"
                 )
             except Exception as err:
-                LOGGER.warning(f"Failed to forward message from {source.id} to {chat} due to {err}")
+                LOGGER.error(f"Failed to forward message from {source.id} to {chat} due to {err}")
 
 
 FORWARD_HANDLER = MessageHandler(
