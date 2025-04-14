@@ -11,4 +11,6 @@ RUN poetry install --no-root --only main
 
 COPY . .
 
+RUN poetry install --only main
+
 CMD ["poetry", "run", "forwarder"]
