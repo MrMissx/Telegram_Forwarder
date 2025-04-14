@@ -10,3 +10,5 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    volumes:
+      - ./chat_list.json:./chat_list.json
