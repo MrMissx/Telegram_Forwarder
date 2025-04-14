@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   telegram-forwarder:
     container_name: telegram-forwarder
@@ -11,4 +9,4 @@ services:
     env_file:
       - .env
     volumes:
-      - ./chat_list.json:./chat_list.json
+      - ./chat_list.json:/app/chat_list.json
